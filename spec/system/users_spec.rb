@@ -12,7 +12,6 @@ RSpec.describe "Users", type: :system do
     
         expect(page).to_not have_text 'ログイン中！'
       end
-      
     end
     
     context 'ログインしている場合' do
@@ -29,6 +28,8 @@ RSpec.describe "Users", type: :system do
         visit new_user_registration_path
         expect(current_path).to eq root_path
       end
+
+      # えふぇえふぇえ
       
       it 'ログイン後のルート画面でログイン中！の文字が表示されていること' do
         user = build(:user)
