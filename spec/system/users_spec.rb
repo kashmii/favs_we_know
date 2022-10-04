@@ -29,8 +29,6 @@ RSpec.describe "Users", type: :system do
         expect(current_path).to eq root_path
       end
 
-      # えふぇえふぇえ
-      
       it 'ログイン後のルート画面でログイン中！の文字が表示されていること' do
         user = build(:user)
         sign_in user
