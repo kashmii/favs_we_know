@@ -1,30 +1,20 @@
-  <h1>Favs We Know</h1>
+<h1>Favs We Know</h1>
 
 <% if user_signed_in? %>
   <%
 =begin%>
   ログインしていて、部屋を持っていない：部屋作成画面
-  ログインしていて、部屋作成済み：部屋作成
 <%
 =end%>
-  <% case @user.room_id
-  when nil %>
+  <p>ログイン後画面</p>
+  <p>部屋を作成して、友だちを呼びましょう！</p>
 
-    <p>ログイン後画面</p>
-    <p>部屋を作成して、友だちを呼びましょう！</p>
-
-    <%= button_to "部屋を作成する", new_room_path, method: :get %>
-    <div class="grid-6">
-      部屋作成リンクor部屋トップ画面
-    </div>
-
-  <% when true %>
-  <p>部屋の画面を表示させる</p>
-  <% end %>
-
+  <%= button_to "部屋を作成する", new_room_path, method: :get %>
+  <div class="grid-6">
+    部屋作成リンクor部屋トップ画面
+  </div>
   <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
 
-  
 <% else %>
 <%
 =begin%>

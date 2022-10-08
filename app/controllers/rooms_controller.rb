@@ -10,10 +10,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     
     if @room.save
-      puts @room.id
-      puts @user.id
-
-      @user.room_id = @room.id
+      @user.update(room_id: @room.id)
       redirect_to room_url(token: @room.token)
     else
       redirect_to root_path

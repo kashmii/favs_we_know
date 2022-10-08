@@ -3,7 +3,7 @@ require 'securerandom'
 class Room < ApplicationRecord
   before_create :generate_token
 
-  has_one :user
+  has_many :users
 
   validates :name, presence: true, length: { in: 2..40 }
 
