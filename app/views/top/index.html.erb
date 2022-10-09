@@ -1,16 +1,29 @@
 <h1>Favs We Know</h1>
+
+<% if user_signed_in? %>
+  <%
+=begin%>
+  ログインしていて、部屋を持っていない：部屋作成画面
+<%
+=end%>
+  <p>ログイン後画面</p>
+  <p>部屋を作成して、友だちを呼びましょう！</p>
+
+  <%= button_to "部屋作成へ", new_room_path, method: :get %>
+  <div class="grid-6">
+    部屋作成リンクor部屋トップ画面
+  </div>
+  <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+<% else %>
+<%
+=begin%>
+  ログインしていなければログインor会員登録
+<%
+=end%>
 <p>お気に入りのお店を友だちとシェアしましょう！</p>
 <%= button_to "ログイン", new_user_session_path, method: :get %>
 <%= button_to "会員登録", new_user_registration_path, method: :get %>
-
-
-
-<% if user_signed_in? %>
-  <div class="grid-6">
-    ログイン中！
-    <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
-  </div>
-<% else %>
   <div class="grid-6">
     誰もいないよ！
   </div>

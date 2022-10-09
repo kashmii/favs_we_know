@@ -1,0 +1,20 @@
+<h2>部屋を作成する</h2>
+
+<%
+=begin%>
+ form_withの引数：model DBに保存するモデルを指定 url postする先のurlを指定 
+<%
+=end%>
+ <%= form_with model: @room, url: {controller: 'rooms', action: 'create' }, local: true do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "部屋を作成する" %>
+  </div>
+<% end %> 
+
+
+<%= link_to "Home", root_path %>
