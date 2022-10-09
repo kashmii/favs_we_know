@@ -73,10 +73,4 @@ RSpec.configure do |config|
 
   # これは必要
   config.include Devise::Test::IntegrationHelpers, type: :system
-  config.include Devise::Test::IntegrationHelpers, type: :feature
-  config.include Devise::Test::IntegrationHelpers, type: :view
-  
-  config.extend ControllerMacros, type: :system
-
-  config.include Warden::Test::Helpers
 end
