@@ -1,4 +1,6 @@
 <%= @room.name %>
 <p>show.html.erb</p>
 
+ <%= button_to "招待・設定", room_room_setting_path(@room.token), method: :get %> 
+
 <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>

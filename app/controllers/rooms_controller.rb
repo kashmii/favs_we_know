@@ -9,13 +9,8 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     user = current_user
-
-    puts "======"
-    puts current_user.id
-    puts "======"
-    
     if @room.save
-      user.update(room_id: @room.id)
+      user.update(room_id: @room.id, is_founder: true)
       redirect_to room_url(token: @room.token)
     else
       redirect_to root_path
@@ -23,7 +18,13 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find_by(token: params[:token])
+    # ログインしてなければ、まずログイン画面にリダイレクト
+    if !user_signed_in?
+      session[:previous_url] = request.url
+      redirect_to about_path
+    else
+      @room = Room.find_by(token: params[:token])
+    end
   end
 
   private

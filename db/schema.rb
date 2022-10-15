@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_01_090000) do
+ActiveRecord::Schema.define(version: 2022_10_15_132749) do
+
+  create_table "member_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "appricant_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["appricant_id"], name: "fk_rails_34d0196034"
+    t.index ["room_id"], name: "index_member_requests_on_room_id"
+  end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -30,10 +39,14 @@ ActiveRecord::Schema.define(version: 2022_10_01_090000) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_founder", default: false
+    t.boolean "request_allowed", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
+  add_foreign_key "member_requests", "rooms"
+  add_foreign_key "member_requests", "users", column: "appricant_id"
   add_foreign_key "users", "rooms"
 end

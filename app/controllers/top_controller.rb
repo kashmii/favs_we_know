@@ -12,6 +12,10 @@ class TopController < ApplicationController
     end
   end
 
+  def about
+    # puts @user.request_allowed
+  end
+
   private
 
     def get_user

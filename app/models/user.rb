@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :room, optional: true
+  has_one :member_request, foreign_key: :appricant_id, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..40 }
 
