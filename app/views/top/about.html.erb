@@ -15,7 +15,11 @@
       <p>招待されてきた方はこちら</p>
       <%= button_to "入室申請する", member_requests_path(params: {url: session[:previous_url]}), method: :post %>
     <% else %>
+      <!-- この中でさらにif文で、許可が出たら部屋画面に行けるボタンを表示 -->
       <p>申請が通るまで少々お待ち下さいm(_ _)m</p>
+
+      <p>申請を取り消す場合はこちら</p>
+      <%= button_to "申請を取り消す", member_requests_path, method: :delete %>
     <% end %>
 
 

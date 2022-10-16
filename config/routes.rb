@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     get 'room_setting', to: 'room_setting#index'
   end
 
-  resources :member_requests, only: [:create, :destory]
+  resource :member_requests, only: [:create, :destroy]
 
 end
