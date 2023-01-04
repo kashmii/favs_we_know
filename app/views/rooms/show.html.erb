@@ -1,8 +1,9 @@
 <%= @room.name %>
 <p>show.html.erb</p>
+<p>レストラン一覧画面</p>
 
-<!-- ここに通知を表示-->
+<!-- ここに通知を表示、しない-->
 
- <%= button_to "招待・設定", room_room_setting_path(@room.token), method: :get %> 
+<%= button_to "招待・設定", room_room_setting_path(@room.token), method: :get %> 
 
 <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
