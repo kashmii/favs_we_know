@@ -7,9 +7,10 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
     user = current_user
+    @room = Room.new(room_params)
     if @room.save
+
       user.update(room_id: @room.id, is_founder: true)
       redirect_to room_url(token: @room.token)
     else

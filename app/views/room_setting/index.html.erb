@@ -3,9 +3,12 @@
 
 <!-- コピー対象要素とコピーボタン -->
 <textarea id="copy2">
-  飲食店共有スペース／ここから登録＆入室をお願いします！<%= @url %>
+飲食店共有スペース／ここから登録＆入室をお願いします！<%= @url %>
 </textarea>
 <button onclick="copyToClipboard()">コピーする</button>
+
+<!-- ここに通知エリア作成 -->
+<p>通知一覧</p>
 
 <script>
   function cp() {
