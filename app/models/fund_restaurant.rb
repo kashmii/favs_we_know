@@ -1,0 +1,2 @@
+class FundRestaurant < ApplicationRecord
+end

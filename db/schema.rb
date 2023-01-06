@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_17_144217) do
+ActiveRecord::Schema.define(version: 2022_10_15_132749) do
+
+  create_table "fund_restaurants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "genre"
+    t.integer "tel"
+    t.string "holiday"
+    t.string "url"
+    t.string "place"
+    t.integer "last_editor"
+    t.bigint "room_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "member_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "room_id"
@@ -19,16 +32,6 @@ ActiveRecord::Schema.define(version: 2022_10_17_144217) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["appricant_id"], name: "fk_rails_34d0196034"
     t.index ["room_id"], name: "index_member_requests_on_room_id"
-  end
-
-  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "visitor_id"
-    t.integer "visited_id"
-    t.integer "comment_id"
-    t.string "action"
-    t.boolean "checked", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -56,6 +59,7 @@ ActiveRecord::Schema.define(version: 2022_10_17_144217) do
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
+  add_foreign_key "fund_restaurants", "rooms"
   add_foreign_key "member_requests", "rooms"
   add_foreign_key "member_requests", "users", column: "appricant_id"
   add_foreign_key "users", "rooms"
