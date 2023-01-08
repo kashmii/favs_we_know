@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   resources :rooms, only: [:new, :create, :show], param: :token do
     get 'room_setting', to: 'room_setting#index'
+    resources :fund_restaurants, only: [:show, :new, :create, :destroy]
   end
 
   resource :member_requests, only: [:create, :destroy]

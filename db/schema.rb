@@ -10,20 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_15_132749) do
-
-  create_table "fund_restaurants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "genre"
-    t.integer "tel"
-    t.string "holiday"
-    t.string "url"
-    t.string "place"
-    t.integer "last_editor"
-    t.bigint "room_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2023_01_08_141431) do
 
   create_table "member_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "room_id"
@@ -32,6 +19,53 @@ ActiveRecord::Schema.define(version: 2022_10_15_132749) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["appricant_id"], name: "fk_rails_34d0196034"
     t.index ["room_id"], name: "index_member_requests_on_room_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "comment_id"
+    t.string "action"
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "room_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "content", null: false
+    t.bigint "room_report_restaurants_id"
+    t.bigint "users_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_report_restaurants_id"], name: "index_room_comments_on_room_report_restaurants_id"
+    t.index ["users_id"], name: "index_room_comments_on_users_id"
+  end
+
+  create_table "room_fund_restaurants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "genre", null: false
+    t.string "place", null: false
+    t.string "holiday"
+    t.string "url"
+    t.bigint "tel"
+    t.bigint "room_id"
+    t.bigint "last_editor_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["last_editor_id"], name: "fk_rails_3f4c21423c"
+    t.index ["room_id"], name: "index_room_fund_restaurants_on_room_id"
+  end
+
+  create_table "room_report_restaurants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "score", null: false
+    t.string "content", null: false
+    t.bigint "room_fund_restaurants_id"
+    t.bigint "users_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_fund_restaurants_id"], name: "index_room_report_restaurants_on_room_fund_restaurants_id"
+    t.index ["users_id"], name: "index_room_report_restaurants_on_users_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -59,8 +93,13 @@ ActiveRecord::Schema.define(version: 2022_10_15_132749) do
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
-  add_foreign_key "fund_restaurants", "rooms"
   add_foreign_key "member_requests", "rooms"
   add_foreign_key "member_requests", "users", column: "appricant_id"
+  add_foreign_key "room_comments", "room_report_restaurants", column: "room_report_restaurants_id"
+  add_foreign_key "room_comments", "users", column: "users_id"
+  add_foreign_key "room_fund_restaurants", "rooms"
+  add_foreign_key "room_fund_restaurants", "users", column: "last_editor_id"
+  add_foreign_key "room_report_restaurants", "room_fund_restaurants", column: "room_fund_restaurants_id"
+  add_foreign_key "room_report_restaurants", "users", column: "users_id"
   add_foreign_key "users", "rooms"
 end

@@ -24,7 +24,8 @@ class RoomsController < ApplicationController
       session[:previous_url] = request.url
       redirect_to about_path
     else
-      @room = Room.find_by(token: params[:token])
+      user = current_user
+      @room = Room.find_by(id: user.room_id)
     end
   end
 
