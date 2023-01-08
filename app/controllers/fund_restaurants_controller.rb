@@ -1,10 +1,11 @@
 class FundRestaurantsController < ApplicationController
-  before_action :set_room, only: [:create, :update]
+  before_action :set_room, only: [:show, :create, :update]
 
   # 部屋の権限を確かめるコードを書く
   # before_action :set_company
 
   def show
+    @restaurant = Room::FundRestaurant.find(params[:id])
   end
 
   def new

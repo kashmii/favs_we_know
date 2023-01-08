@@ -2,6 +2,11 @@
 <p>show.html.erb</p>
 <p>レストラン一覧画面</p>
 
+<% @restaurants.each do |restaurant| %>
+  <p><%= restaurant.genre %></p>
+  <span><%= link_to restaurant.genre, room_fund_restaurant_path(@room.token, restaurant.id) %></span>
+
+<% end %>
 <!-- ここに通知を表示、しない-->
 
 <%= button_to "飲食店登録", new_room_fund_restaurant_path(@room.token), method: :get %> 

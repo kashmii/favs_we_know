@@ -27,6 +27,7 @@ class RoomsController < ApplicationController
       user = current_user
       @room = Room.find_by(id: user.room_id)
     end
+    @restaurants = Room::FundRestaurant.all
   end
 
   private
