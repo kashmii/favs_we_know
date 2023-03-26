@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     get 'room_setting', to: 'room_setting#index'
     resources :fund_restaurants, only: [:show, :new, :create, :destroy]
   end
+  resources :fund_restaurants do
+    resources :reports, only: [:show, :new, :create, :destroy]
+  end
+
 
   resource :member_requests, only: [:create, :destroy]
 

@@ -1,0 +1,13 @@
+<%= simple_form_for @report do |f| %>
+  <%= f.input :title %>
+  <%= f.input :score %>
+  <%= f.input :content, as: :text %>
+
+  <%= f.button :submit, class: "btn-primary" %>
+<% end %>
+
+<div>
+  <%= link_to :back do %>
+    <button class="btn btn-secondary">戻る</button>
+  <% end %>
+</div>

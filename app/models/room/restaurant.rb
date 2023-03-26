@@ -1,6 +1,6 @@
-class Room::FundRestaurant < ApplicationRecord
-
+class Room::Restaurant < ApplicationRecord
   belongs_to :room
+  has_many :reports, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 100 }
   validates :genre, presence: true, length: { maximum: 50 }
