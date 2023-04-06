@@ -5,7 +5,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
     create_table :users do |t|
       t.string :name, null: false
       t.references :room, foreign_key: true
-      t.boolean :request_allowed, default: true
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""
