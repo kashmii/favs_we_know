@@ -4,14 +4,23 @@
   <!-- ログインしていて、部屋を持っていない：部屋作成画面 -->
   <p>ログイン後画面</p>
 
-    <% if session[:previous_url].nil? %>
+  <p>ログインユーザー:<%= current_user.name %></p>
+  <p>ログインID:<%= current_user.id %></p>
 
-      <p>部屋を作成して、友だちを呼びましょう！</p>
-      <%= button_to "部屋作成へ", new_room_path, method: :get %>
+  <% if @notification %>
+    <div class="answer-modal">
+      <%= render 'answer_message' %>
+    </div>
+  <% end %>
 
-    <% end %>
+  <% if session[:previous_url].nil? %>
 
-    <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <p>部屋を作成して、友だちを呼びましょう！</p>
+    <%= button_to "部屋作成へ", new_room_path, method: :get %>
+
+  <% end %>
+
+  <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
 
 <% else %>
   <!-- ログインしていなければログインor会員登録 -->

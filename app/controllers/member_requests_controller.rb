@@ -1,4 +1,6 @@
 class MemberRequestsController < ApplicationController
+  before_action :set_request, only: %i(allow deny)
+  before_action :get_user, only: %i(allow deny)
 
   def create
     if current_user.request_allowed == true
@@ -9,15 +11,14 @@ class MemberRequestsController < ApplicationController
 
         request.save!
         # 部屋製作者を取得してnotificationテーブルのvisited_idに設定する
-        room_founder = User.find_by(room_id: @room.id, is_founder: true)
-        room_founder.create_notification_member_request!(current_user)
+        # 消す
+        room_founder = User.find_by(room_id: @room.id)
+        room_founder.create_notification_member_request!(current_user, request)
         @user.update!(request_allowed: false)
 
       end
         # flash出す
       redirect_to about_path, notice: '入室申請しました'
-    else
-      puts 'nanimo sitenai'
     end
   end
 
@@ -35,6 +36,16 @@ class MemberRequestsController < ApplicationController
     redirect_to about_path, notice: '入室申請を取り消しました'
   end
 
+  def allow
+    @request.allowed!
+    redirect_to notifications_path
+  end
+
+  def deny
+    @request.denied!
+    redirect_to notifications_path, notice: '接続を拒否しました'
+  end
+
   private
 
     def get_user
@@ -47,7 +58,10 @@ class MemberRequestsController < ApplicationController
 
     def get_room_and_token
       room_token = request_params.gsub('http://localhost:3000/rooms/', '')
-      puts room_token
       @room = Room.find_by(token: room_token)
+    end
+
+    def set_request
+      @request = MemberRequest.find(params[:id])
     end
 end

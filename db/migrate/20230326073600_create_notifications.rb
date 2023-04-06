@@ -3,7 +3,7 @@ class CreateNotifications < ActiveRecord::Migration[6.0]
     create_table :member_requests do |t|
       t.references :room, foreign_key: true, null: false
       t.bigint :appricant_id, null: false
-      t.integer :status, null: false
+      t.integer :status, null: false, default: 0
 
       t.timestamps
     end

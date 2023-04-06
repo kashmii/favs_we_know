@@ -7,15 +7,22 @@ Rails.application.routes.draw do
   root 'top#index'
   get  'about',   to: 'top#about'
   
-  resources :rooms, only: [:new, :create, :show], param: :token do
-    get 'room_setting', to: 'room_setting#index'
-    resources :fund_restaurants, only: [:show, :new, :create, :destroy]
-  end
-  resources :fund_restaurants do
-    resources :reports, only: [:show, :new, :create, :destroy]
+  resources :rooms, param: :token do
+    get 'setting', to: 'room_setting#index'
+    resources :restaurants, controller: 'room/restaurants'
+    resources :reports, controller: 'room/reports'
   end
 
-
-  resource :member_requests, only: [:create, :destroy]
+  resources :member_requests, only: [:create, :destroy] do
+    member do
+      post :allow
+      post :deny
+    end
+  end
+  resources :notifications, only: [:index, :create, :destroy] do
+    member do
+      post :checked
+    end
+  end
 
 end

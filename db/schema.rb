@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_27_105932) do
+ActiveRecord::Schema.define(version: 2023_04_02_101739) do
 
   create_table "member_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "room_id", null: false
     t.bigint "appricant_id", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["appricant_id"], name: "fk_rails_34d0196034"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2023_03_27_105932) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["member_request_id"], name: "index_notifications_on_member_request_id"
     t.index ["room_report_id"], name: "index_notifications_on_room_report_id"
+  end
+
+  create_table "room_founders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "founder_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["founder_id"], name: "index_room_founders_on_founder_id"
+    t.index ["room_id"], name: "index_room_founders_on_room_id"
   end
 
   create_table "room_reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -67,8 +76,6 @@ ActiveRecord::Schema.define(version: 2023_03_27_105932) do
     t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "founder_id"
-    t.index ["founder_id"], name: "fk_rails_adb59cc467"
     t.index ["token"], name: "index_rooms_on_token", unique: true
   end
 
@@ -92,10 +99,11 @@ ActiveRecord::Schema.define(version: 2023_03_27_105932) do
   add_foreign_key "member_requests", "users", column: "appricant_id"
   add_foreign_key "notifications", "member_requests"
   add_foreign_key "notifications", "room_reports"
+  add_foreign_key "room_founders", "rooms"
+  add_foreign_key "room_founders", "users", column: "founder_id"
   add_foreign_key "room_reports", "room_restaurants"
   add_foreign_key "room_reports", "users", column: "writer_id"
   add_foreign_key "room_restaurants", "rooms"
   add_foreign_key "room_restaurants", "users", column: "last_editor_id"
-  add_foreign_key "rooms", "users", column: "founder_id"
   add_foreign_key "users", "rooms"
 end

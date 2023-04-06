@@ -1,14 +1,24 @@
 # rootのコントローラ
 class TopController < ApplicationController
-  before_action :get_user
+  before_action :set_user
+  before_action :set_answer_notification, only: :index
 
   def index
     # ログインしていて、部屋作成済み：部屋画面へ
     if user_signed_in? && @user.room_id.present?
-      puts "====="
-      puts @user.room_id
       @room = Room.find(@user.room_id)
+      # 入室申請に返事が来ているときにアラートを表示する
+      if @notification.present?
+        flash[:notice] = '申請がOKされました。room名をお楽しみください！'
+        @notification.update!(checked: true)
+      end
       redirect_to room_url(token: @room.token)
+    else
+      # 入室申請に返事が来ているときにアラートを表示する
+      if @notification.present?
+        flash[:notice] = '入室は断られました。'
+        @notification.update!(checked: true)
+    end
     end
   end
 
@@ -21,7 +31,17 @@ class TopController < ApplicationController
 
   private
 
-    def get_user
+    def set_user
       @user = current_user
-    end  
+    end
+
+    def set_answer_notification
+      if @user.present?
+        @notification = Notification.find_by(
+          action: 'request_answer',
+          visited_id: @user.id,
+          checked: false
+        )
+      end
+    end
 end

@@ -10,18 +10,16 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..40 }
-
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :email, presence: true, length: { maximum: 255 }
 
   # 通知関連
   # 部屋申請時の通知
-  def create_notification_member_request!(current_user)
-    if current_user.request_allowed
+  def create_notification_member_request!(current_user, request)
+    if current_user.request_allowed == true
       notification = current_user.active_notifications.new(
         visited_id: id,
-        action: 'member_request'
+        action: 'member_request',
+        member_request_id: request.id
       )
       notification.save if notification.valid?
     end
