@@ -10,66 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_02_101739) do
-
-  create_table "member_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "room_id", null: false
-    t.bigint "appricant_id", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["appricant_id"], name: "fk_rails_34d0196034"
-    t.index ["room_id"], name: "index_member_requests_on_room_id"
-  end
-
-  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
-    t.string "action", null: false
-    t.bigint "member_request_id"
-    t.bigint "room_report_id"
-    t.boolean "checked", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_request_id"], name: "index_notifications_on_member_request_id"
-    t.index ["room_report_id"], name: "index_notifications_on_room_report_id"
-  end
-
-  create_table "room_founders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "founder_id", null: false
-    t.bigint "room_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["founder_id"], name: "index_room_founders_on_founder_id"
-    t.index ["room_id"], name: "index_room_founders_on_room_id"
-  end
-
-  create_table "room_reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "title", null: false
-    t.integer "score"
-    t.string "content", null: false
-    t.bigint "room_restaurant_id", null: false
-    t.bigint "writer_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_restaurant_id"], name: "index_room_reports_on_room_restaurant_id"
-    t.index ["writer_id"], name: "fk_rails_71ff8ae94a"
-  end
-
-  create_table "room_restaurants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "genre", null: false
-    t.string "place", null: false
-    t.string "holiday"
-    t.string "url"
-    t.integer "tel"
-    t.bigint "room_id", null: false
-    t.bigint "last_editor_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["last_editor_id"], name: "fk_rails_5e884f3040"
-    t.index ["room_id"], name: "index_room_restaurants_on_room_id"
-  end
+ActiveRecord::Schema.define(version: 2022_10_01_090000) do
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -82,7 +23,6 @@ ActiveRecord::Schema.define(version: 2023_04_02_101739) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "room_id"
-    t.boolean "request_allowed", default: true
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -95,15 +35,5 @@ ActiveRecord::Schema.define(version: 2023_04_02_101739) do
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
-  add_foreign_key "member_requests", "rooms"
-  add_foreign_key "member_requests", "users", column: "appricant_id"
-  add_foreign_key "notifications", "member_requests"
-  add_foreign_key "notifications", "room_reports"
-  add_foreign_key "room_founders", "rooms"
-  add_foreign_key "room_founders", "users", column: "founder_id"
-  add_foreign_key "room_reports", "room_restaurants"
-  add_foreign_key "room_reports", "users", column: "writer_id"
-  add_foreign_key "room_restaurants", "rooms"
-  add_foreign_key "room_restaurants", "users", column: "last_editor_id"
   add_foreign_key "users", "rooms"
 end
