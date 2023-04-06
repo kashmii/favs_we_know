@@ -1,0 +1,2 @@
+module Rooms::FundRestaurantsHelper
+end

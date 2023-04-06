@@ -5,6 +5,8 @@ RSpec.describe "Rooms", type: :system do
     driven_by(:rack_test)
   end
 
+  # ===== =====
+  # section2
   describe 'ログイン後のユーザーの部屋作成／その後に関して' do
     context 'ログインしたのがroom_idを持たないユーザーの場合' do
       it "部屋を作成できる" do
@@ -33,4 +35,6 @@ RSpec.describe "Rooms", type: :system do
       end
     end
   end
+    # section2ここまで
+    # ===== =====
 end

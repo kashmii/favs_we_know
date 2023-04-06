@@ -6,6 +6,8 @@ RSpec.describe "Users", type: :system do
     driven_by(:rack_test)
   end
 
+  # ===== =====
+  # section1,2
   describe 'ログインしていない場合' do
     context 'ログインしていない場合' do
       it 'ログインしていなければログイン中！は表示されていないこと' do
@@ -41,4 +43,6 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+  # section1,2ここまで
+  # ===== =====
 end
