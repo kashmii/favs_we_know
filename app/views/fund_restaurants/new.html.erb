@@ -1,0 +1,15 @@
+<%= simple_form_for @restaurant do |f| %>
+  <%= f.input :name %>
+  <%= f.input :genre %>
+  <%= f.input :place %>
+  <%= f.input :holiday %>
+  <%= f.input :url %>
+  <%= f.input :tel %>
+  <%= f.button :submit %>
+<% end %>
+
+<div>
+  <%= link_to :back do %>
+    <button>戻る</button>
+  <% end %>
+</div>

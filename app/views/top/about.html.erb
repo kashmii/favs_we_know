@@ -1,0 +1,32 @@
+<h1>Top#about</h1>
+<p>お気に入りの飲食店を、身近な友だちとだけ共有できるwebアプリです</p>
+
+  <!-- 招待されて飛んできた直後 -->
+  <% if !user_signed_in? && session[:previous_url].present? %>
+
+    <%= button_to "会員登録", new_user_registration_path, method: :get %> 
+
+    <p>もしもすでに会員登録を終えている方は</p>
+    <%= button_to "ログイン", new_user_session_path, method: :get %>
+
+  <!-- 招待されてきて、会員登録した後 -->
+  <% elsif user_signed_in? && session[:previous_url].present? %>
+    <% unless @user.request_allowed == false %>
+      <p>招待されてきた方はこちら</p>
+      <%= button_to "入室申請する", member_requests_path(params: {url: session[:previous_url]}), method: :post %>
+    <% else %>
+      <!-- この中でさらにif文で、許可が出たら部屋画面に行けるボタンを表示 -->
+      <p>申請が通るまで少々お待ち下さいm(_ _)m</p>
+
+      <p>申請を取り消す場合はこちら</p>
+      <%= button_to "申請を取り消す", member_requests_path, method: :delete %>
+    <% end %>
+
+
+    
+  <!-- 招待で来たわけではない人(何もなし) -->
+  <% else %>
+
+    <%= link_to "Home", root_path %>
+
+  <% end %>

@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  # before_action :get_user, only: [:new, :create]
+  before_action :set_user, only: [:new, :show, :create]
 
   def new
     # もしuserのroom_idが埋まっていたら別のページに遷移させ、部屋を作らせない
@@ -8,22 +8,26 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    user = current_user
-
-    puts "======"
-    puts current_user.id
-    puts "======"
-    
-    if @room.save
-      user.update(room_id: @room.id)
-      redirect_to room_url(token: @room.token)
-    else
-      redirect_to root_path
+    Room.transaction do
+      if @room.save!
+        @user.update!(room_id: @room.id)
+        RoomFounder.create!(room_id: @room.id, founder_id: @user.id)
+        redirect_to room_url(token: @room.token)
+      else
+        redirect_to root_path
+      end
     end
   end
 
   def show
-    @room = Room.find_by(token: params[:token])
+    # ログインしてなければ、まずログイン画面にリダイレクト
+    if !user_signed_in?
+      session[:previous_url] = request.url
+      redirect_to about_path
+    else
+      @room = @user.room
+    end
+    @restaurants = Room::Restaurant.all
   end
 
   private
@@ -33,7 +37,7 @@ class RoomsController < ApplicationController
     end
 
     # rspecでprivateメソッドを使えないようだったので、メソッド内に直接書くことにした
-    # def get_user
-    #   user = current_user
-    # end
+    def set_user
+      @user = current_user
+    end
 end
