@@ -1,11 +1,12 @@
-class Room::RestaurantsController < ApplicationController
-  before_action :set_room, only: [:show, :create, :update]
+class RestaurantsController < ApplicationController
+  before_action :set_room, only: [:index, :show, :create, :update]
 
-  # 部屋の権限を確かめるコードを書く
-  # before_action :set_company
+  def index
+    redirect_to new_room_restaurant_path(@room.token)
+  end
 
   def show
-    @restaurant = Room::Restaurant.find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
   end
 
   def new
@@ -16,15 +17,20 @@ class Room::RestaurantsController < ApplicationController
       user = current_user
       @room = Room.find_by(id: user.room_id)
     end
-    @restaurant = Room::Restaurant.new
-    # render 'new'
+    @restaurant = Restaurant.new
   end
 
   def create
-    @restaurant = Room::Restaurant.new(restaurant_params)
+    @restaurant = Restaurant.new(restaurant_params)
     @restaurant.room_id = current_user.room_id
     @restaurant.last_editor_id = current_user.id
-    @restaurant.save!
+
+    if @restaurant.valid?
+        @restaurant.save!
+        redirect_to room_path(@room)
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -43,7 +49,7 @@ class Room::RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:room_restaurant).permit(
+    params.require(:restaurant).permit(
       :name,
       :genre,
       :place,

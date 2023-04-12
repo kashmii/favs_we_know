@@ -27,7 +27,7 @@ class RoomsController < ApplicationController
     else
       @room = @user.room
     end
-    @restaurants = Room::Restaurant.all
+    @restaurants = Restaurant.all
   end
 
   private

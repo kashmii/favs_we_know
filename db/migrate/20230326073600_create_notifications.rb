@@ -14,7 +14,7 @@ class CreateNotifications < ActiveRecord::Migration[6.0]
       t.integer :visited_id, null: false
       t.string :action, null: false
       t.references :member_request, foreign_key: true
-      t.references :room_report, foreign_key: true
+      t.references :restaurant_report, foreign_key: true
       t.boolean :checked, null: false, default: false
 
       t.timestamps

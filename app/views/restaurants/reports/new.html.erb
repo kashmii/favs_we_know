@@ -1,0 +1,40 @@
+<div class="container">
+  <%= form_with model: @report do |f| %>
+    <div class="field">
+      
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= render 'layouts/error_messages', model: f.object %>
+      </div>
+
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= f.label :title, class: "col-md-3 form-label required" %>
+        <%= f.text_field :title, class: "col-md-6" %>
+      </div>
+
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= f.label :score, class: "col-md-3 form-label" %>
+        <%= f.text_field :score, class: "col-md-6" %>
+      </div>
+
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= f.label :content, class: "col-md-3 form-label required" %>
+        <%= f.text_area :content, class: "col-md-6", as: :text %>
+      </div>
+
+      <div class="btn actions space">
+        <%= f.button :submit, class: "btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div>
+    <%= link_to :back do %>
+      <button class="btn btn-secondary">戻る</button>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+  

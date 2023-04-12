@@ -8,17 +8,17 @@ class TopController < ApplicationController
     if user_signed_in? && @user.room_id.present?
       @room = Room.find(@user.room_id)
       # 入室申請に返事が来ているときにアラートを表示する
-      if @notification.present?
+      if @answer_notification.present?
         flash[:notice] = '申請がOKされました。room名をお楽しみください！'
-        @notification.update!(checked: true)
+        @answer_notification.update!(checked: true)
       end
       redirect_to room_url(token: @room.token)
     else
       # 入室申請に返事が来ているときにアラートを表示する
-      if @notification.present?
+      if @answer_notification.present?
         flash[:notice] = '入室は断られました。'
-        @notification.update!(checked: true)
-    end
+        @answer_notification.update!(checked: true)
+      end
     end
   end
 
@@ -37,7 +37,7 @@ class TopController < ApplicationController
 
     def set_answer_notification
       if @user.present?
-        @notification = Notification.find_by(
+        @answer_notification = Notification.find_by(
           action: 'request_answer',
           visited_id: @user.id,
           checked: false

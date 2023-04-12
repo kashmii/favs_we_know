@@ -1,6 +1,6 @@
-class CreateRoomRestaurants < ActiveRecord::Migration[6.0]
+class CreateRestaurants < ActiveRecord::Migration[6.0]
   def change
-    create_table :room_restaurants do |t|
+    create_table :restaurants do |t|
       t.string :name, null: false
       t.string :genre, null: false
       t.string :place, null: false
@@ -12,6 +12,6 @@ class CreateRoomRestaurants < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_foreign_key :room_restaurants, :users, column: :last_editor_id
+    add_foreign_key :restaurants, :users, column: :last_editor_id
   end
 end

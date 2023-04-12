@@ -11,7 +11,7 @@
         <%= image_tag "favs_blank002.jpg", class: "img-thumbnail" %>
       </div>
       <div class="col-9">
-      <span><%= link_to restaurant.name, room_restaurant_path(@room.token, restaurant.id) %></span>
+      <span><%= link_to restaurant.name, restaurant_path(@room.token, restaurant.id) %></span>
       <p><%= restaurant.genre %>／<%= restaurant.place %></p>
       </div>
     </div>
@@ -20,7 +20,7 @@
 
 <!-- ここに通知を表示、しない-->
 
-<%= link_to "飲食店登録", new_room_restaurant_path(@room.token), class: "btn btn-success mb-2" %> 
+<%= link_to "飲食店登録", new_restaurant_path, class: "btn btn-success mb-2" %> 
 
 <%= link_to "通知画面", notifications_path, class: "btn btn-info mb-2" %> 
 

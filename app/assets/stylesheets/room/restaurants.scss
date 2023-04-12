@@ -1,3 +1,19 @@
-// Place all the styles related to the Room::Restaurants controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.required:after {
+  content: " *";
+}
+
+.tel:after {
+  content: " (ハイフンなし)";
+}
+
+.back {
+  color: black;
+
+  @include media-breakpoint-up(sm) {
+    color: red;
+  }
+}
+
+.space {
+  margin: 0 0 100px;
+}
