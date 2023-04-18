@@ -2,11 +2,12 @@ class RestaurantsController < ApplicationController
   before_action :set_room, only: [:index, :show, :create, :update]
 
   def index
-    redirect_to new_room_restaurant_path(@room.token)
+    redirect_to new_restaurant_path(@room.token)
   end
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @reports = @restaurant.reports.eager_load(:writer)
   end
 
   def new
@@ -24,7 +25,6 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.room_id = current_user.room_id
     @restaurant.last_editor_id = current_user.id
-
     if @restaurant.valid?
         @restaurant.save!
         redirect_to room_path(@room)

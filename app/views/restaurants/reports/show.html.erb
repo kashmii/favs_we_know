@@ -1,1 +1,10 @@
+<h4>レポート詳細画面</h4>
+<p>写真の場所</p>
 <p>showing content and pictures of the report</p>
+<p>タイトル： <%= @report.title %></p>
+<p>スコア： <%= @report.score %></p>
+<p>本文： <%= @report.content %></p>
+
+
+<%= link_to '戻る', restaurant_path(@restaurant), class: "btn btn-secondary" %>
+<%= link_to '削除', @report, method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: 'btn btn-danger' %>

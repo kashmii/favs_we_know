@@ -1,0 +1,5 @@
+<%= link_to restaurant_report_path(@restaurant, id: report.id), class: 'btn' do %>
+  <%= report.title %>
+  <span>投稿者：<%= report.writer.name %></span>
+<% end %>
+<p>=====</p>

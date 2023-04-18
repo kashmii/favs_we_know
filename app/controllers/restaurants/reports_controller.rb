@@ -1,8 +1,9 @@
 class Restaurants::ReportsController < ApplicationController
-  before_action :set_room, only: [:show, :create, :update]
+  before_action :set_room, only: [:show, :create, :update, :destroy]
 
   def show
-    @restaurant = Restaurant::Report.find(params[:id])
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @report = Restaurant::Report.find(params[:id])
   end
 
   def new
@@ -17,14 +18,21 @@ class Restaurants::ReportsController < ApplicationController
   end
 
   def create
-    @report = Restaurant::Report.new(report_params)
-    @report.restaurant_id = params[:restaurant_id].to_i
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @report = @restaurant.reports.build(report_params)
     @report.writer_id = current_user.id
-    @report.save!
-    redirect_to restaurant_report_path(@report.restaurant_id, @report.id)
+    if @report.valid?
+      @report.save!
+      redirect_to restaurant_report_path(@restaurant, @report)
+    else
+      render :new
+    end
   end
 
   def destroy
+    report = Restaurant::Report.find(params[:id])
+    report.destroy
+    redirect_to room_path(@room.token), notice: "投稿を削除しました。"
   end
 
   private
@@ -45,7 +53,7 @@ class Restaurants::ReportsController < ApplicationController
     )
   end
   
-  def new_params
+  def new_params  
     params.permit(
       :restaurant_id
     )

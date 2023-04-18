@@ -11,7 +11,7 @@
         <%= image_tag "favs_blank002.jpg", class: "img-thumbnail" %>
       </div>
       <div class="col-9">
-      <span><%= link_to restaurant.name, restaurant_path(@room.token, restaurant.id) %></span>
+      <span><%= link_to restaurant.name, restaurant_path(restaurant.id) %></span>
       <p><%= restaurant.genre %>／<%= restaurant.place %></p>
       </div>
     </div>
