@@ -9,6 +9,8 @@
     <p>もしもすでに会員登録を終えている方は</p>
     <%= button_to "ログイン", new_user_session_path, method: :get %>
 
+    <%= link_to "Home", root_path %>
+
   <!-- 招待されてきて、会員登録した後 -->
   <% elsif user_signed_in? && session[:previous_url].present? %>
     <% unless @user.request_allowed == false %>
