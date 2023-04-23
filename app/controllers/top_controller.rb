@@ -1,6 +1,6 @@
 # rootのコントローラ
 class TopController < ApplicationController
-  before_action :set_user
+  before_action :set_user, :set_app_title
   before_action :set_answer_notification, only: :index
 
   def index
