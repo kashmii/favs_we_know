@@ -1,29 +1,31 @@
-<h2>部屋の名前：<%= @room.name %></h2>
+<h2 class="text-center mt-3">部屋の名前：<%= @room.name %></h2>
 
-
-<p>レストラン一覧画面</p>
+<p class="text-center mt-3">レストラン一覧画面</p>
 
 <div class="container mb-4">
   <% @restaurants.each do |restaurant| %>
     <div class="row mb-2">
-      <div class="col-3">
+      <div class="col-6 col-md-3">
         <!-- img-thumbnailをクラスに置くことで、bootstrapが自動で親要素にサイズを合わせてくれる -->
-        <%= image_tag "favs_blank002.jpg", class: "img-thumbnail" %>
+        <%= image_tag "blank_mono.jpg", class: "img-thumbnail" %>
       </div>
-      <div class="col-9">
-      <span><%= link_to restaurant.name, room_restaurant_path(@room.token, restaurant.id) %></span>
+      <div class="col-6 col-md-9 mt-4">
+      <span><%= link_to restaurant.name, restaurant_path(restaurant.id) %></span>
       <p><%= restaurant.genre %>／<%= restaurant.place %></p>
       </div>
     </div>
   <% end %>
+
+  <div class="d-flex justify-content-center">
+    <%= link_to "飲食店登録", new_restaurant_path, class: "btn btn-success mb-2" %>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= link_to "通知画面", notifications_path, class: "btn btn-info mb-2" %>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= link_to "招待・設定", room_setting_path(@room.token), class: "btn btn-secondary mb-2" %>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-dark mb-2" %>
+  </div>
 </div>
-
-<!-- ここに通知を表示、しない-->
-
-<%= link_to "飲食店登録", new_room_restaurant_path(@room.token), class: "btn btn-success mb-2" %> 
-
-<%= link_to "通知画面", notifications_path, class: "btn btn-info mb-2" %> 
-
-<%= link_to "招待・設定", room_setting_path(@room.token), class: "btn btn-secondary mb-2" %> 
-
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-dark mb-2" %>

@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 class="text-center mt-3">レポートを登録する</h2>
+  <p class="text-center mt-3">行ったお店の感想を登録しましょう！</p>
+
+  <%= form_with model: @report, local: true do |f| %>
+    <div class="field">
+      
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= render 'layouts/error_messages', model: f.object %>
+      </div>
+
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= f.label :title, class: "col-md-3 form-label required" %>
+        <%= f.text_field :title, class: "col-md-6" %>
+      </div>
+
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= f.label :score, class: "col-md-3 form-label" %>
+        <%= f.text_field :score, class: "col-md-6" %>
+      </div>
+
+      <div class="row mb-3 d-flex justify-content-center">
+        <%= f.label :content, class: "col-md-3 form-label required" %>
+        <%= f.text_area :content, class: "col-md-6", as: :text %>
+      </div>
+
+      <div class="actions submit d-flex justify-content-center">
+        <%= f.submit "レポートを登録する", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="d-flex justify-content-center mt-5">
+    <%= link_to "戻る", restaurant_path(id: @restaurant.id), class: "btn btn-secondary" %>
+  </div>
+</div>
+
+
+
+
+  

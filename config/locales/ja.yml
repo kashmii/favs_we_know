@@ -6,6 +6,18 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      restaurant:
+        name: 店名
+        genre: ジャンル
+        place: 場所
+        holiday: 定休日
+        url: ホームページ
+        tel: 電話番号
+      restaurant/report:
+        title: タイトル
+        score: 点数
+        content: 本文
   date:
     abbr_day_names:
       - 日

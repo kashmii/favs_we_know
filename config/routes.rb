@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   
   resources :rooms, param: :token do
     get 'setting', to: 'room_setting#index'
-    resources :restaurants, controller: 'room/restaurants'
-    resources :reports, controller: 'room/reports'
+  end
+
+  resources :restaurants do
+    resources :reports, controller: 'restaurants/reports'
   end
 
   resources :member_requests, only: [:create, :destroy] do

@@ -16,6 +16,13 @@ module App
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
     config.i18n.default_locale = :ja
+
+    # バリデーションエラー時にRailsが自動的に生成するfield_with_errorsクラスを持つdivタグを
+    # 除外している
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end

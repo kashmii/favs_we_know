@@ -1,0 +1,21 @@
+<p class="text-center my-4">お気に入りのお店を友だちにシェアしましょう！</p>
+
+<div class="main-image">
+  <%= image_tag "blank_mono.jpg", class: "img-thumbnail" %>
+</div>
+
+<div class="btn-container">
+  <div class="d-flex justify-content-center sign_in mt-4">
+    <%= button_to "ログイン", new_user_session_path, method: :get, class: "btn btn-dark" %>
+  </div>
+  
+  <p class="text-center mt-5">会員登録がまだの方はこちら</p>
+  <div class="d-flex justify-content-center register mt-3">
+    <%= button_to "会員登録", new_user_registration_path, method: :get, class: "btn btn-success" %>
+  </div>
+  
+  <p class="text-center mt-5">初めてここに来た方はこちら</p>
+  <div class="d-flex justify-content-center about mt-3">
+    <%= link_to "このアプリについて", about_path, class: "btn btn-secondary" %>
+  </div>
+</div>

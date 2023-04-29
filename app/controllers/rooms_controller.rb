@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     Room.transaction do
       if @room.save!
-        @user.update!(room_id: @room.id)
+        @user.update!(room_id: @room.id, request_allowed: false)
         RoomFounder.create!(room_id: @room.id, founder_id: @user.id)
         redirect_to room_url(token: @room.token)
       else
@@ -27,7 +27,7 @@ class RoomsController < ApplicationController
     else
       @room = @user.room
     end
-    @restaurants = Room::Restaurant.all
+    @restaurants = Restaurant.where(room_id: @room)
   end
 
   private
