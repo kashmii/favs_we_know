@@ -13,8 +13,9 @@
  */
  @import "bootstrap";
 
- @import "./room/restaurants";
  @import "./layouts/error_messages";
+ @import "./restaurants/reports";
  @import "./top";
+ @import "./restaurants";
  @import "./devise/registrations/*";
  

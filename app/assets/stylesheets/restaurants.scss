@@ -1,3 +1,25 @@
-// Place all the styles related to the restaurants controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.basic-info {
+  border: 1px solid #000;
+}
+
+.report-link {
+  background-color: bisque;
+  width: 80%;
+  text-align: center;
+
+  a {
+    width: 100%;
+  }
+}
+
+.required:after {
+  content: " *";
+}
+
+.tel:after {
+  content: " (ハイフンなし)";
+}
+
+.submit {
+  margin: 40px 0;
+}

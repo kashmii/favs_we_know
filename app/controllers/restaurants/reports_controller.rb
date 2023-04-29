@@ -1,8 +1,8 @@
 class Restaurants::ReportsController < ApplicationController
   before_action :set_room, only: [:show, :create, :update, :destroy]
+  before_action :set_restaurant, only: [:show, :new, :create]
 
   def show
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @report = Restaurant::Report.find(params[:id])
   end
 
@@ -18,7 +18,6 @@ class Restaurants::ReportsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @report = @restaurant.reports.build(report_params)
     @report.writer_id = current_user.id
     if @report.valid?
@@ -45,6 +44,11 @@ class Restaurants::ReportsController < ApplicationController
       user = current_user
       @room = Room.find_by(id: user.room_id)
     end
+  end
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
+
   end
 
   def report_params

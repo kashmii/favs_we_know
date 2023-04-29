@@ -1,5 +1,9 @@
-<%= link_to restaurant_report_path(@restaurant, id: report.id), class: 'btn' do %>
-  <%= report.title %>
-  <span>投稿者：<%= report.writer.name %></span>
-<% end %>
-<p>=====</p>
+<div class="d-flex justify-content-center">
+  <div class="report-link mb-3">
+    <%= link_to restaurant_report_path(@restaurant, id: report.id), class: 'btn' do %>
+      <p>写真入れる場所</p>
+      <p><%= report.title %></p>
+      <p> 投稿者：<%= report.writer.name %></p>
+    <% end %>
+  </div>
+</div>

@@ -33,8 +33,7 @@
       <div class="d-flex justify-content-center mt-5">
         <%= link_to "トップページへ", root_path, class: "btn btn-secondary" %>
       </div>
-
-
+      
     <!-- 招待されてきて、会員登録した後 -->
     <% elsif user_signed_in? && session[:previous_url].present? %>
       <% unless @user.request_allowed == false %>
@@ -48,12 +47,10 @@
         <%= button_to "申請を取り消す", member_requests_path, method: :delete %>
       <% end %>
 
-
-      
     <!-- 招待で来たわけではない人(何もなし) -->
     <% else %>
-
-      <%= link_to "Home", root_path %>
-
+      <div class="d-flex justify-content-center mt-5">
+        <%= link_to "トップページへ", root_path, class: "btn btn-secondary" %>
+      </div>
     <% end %>
 </div>
