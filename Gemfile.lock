@@ -300,6 +300,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.2)
+  mini_portile2 (~> 2.8, >= 2.8.1)
   mysql2 (>= 0.4.4)
   net-http
   puma (~> 4.1)
