@@ -71,3 +71,5 @@ gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
 
 gem 'rails-i18n', '~> 6.0.0'
+
+gem 'mini_portile2', '~> 2.8', '>= 2.8.1'
