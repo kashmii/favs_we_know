@@ -57,7 +57,11 @@ class MemberRequestsController < ApplicationController
     end
 
     def get_room_and_token
-      room_token = request_params.gsub('http://localhost:3000/rooms/', '')
+      if Rails.env.production?
+        room_token = request_params.gsub('https://restaurants-we-know.herokuapp.com/rooms/', '')
+      elsif Rails.env.development?
+        room_token = request_params.gsub('http://localhost:3000/rooms/', '')
+      end
       @room = Room.find_by(token: room_token)
     end
 
