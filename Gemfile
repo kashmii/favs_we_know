@@ -73,3 +73,9 @@ gem 'jquery-rails'
 gem 'rails-i18n', '~> 6.0.0'
 
 gem 'mini_portile2', '~> 2.8', '>= 2.8.1'
+
+gem 'cloudinary' , '1.11.1'
+gem 'carrierwave', '~> 1.3.1'
+gem 'mini_magick'
+
+gem 'dotenv-rails'

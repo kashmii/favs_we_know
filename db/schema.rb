@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_11_234943) do
+ActiveRecord::Schema.define(version: 2023_05_03_102306) do
 
   create_table "member_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "room_id", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2023_04_11_234943) do
     t.bigint "last_editor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.json "images"
     t.index ["last_editor_id"], name: "fk_rails_55a7bbfb48"
     t.index ["room_id"], name: "index_restaurants_on_room_id"
   end

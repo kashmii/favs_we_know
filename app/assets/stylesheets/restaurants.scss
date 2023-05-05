@@ -20,6 +20,10 @@
   content: " (ハイフンなし)";
 }
 
+.img:after {
+  content: " (3枚まで)";
+}
+
 .submit {
   margin: 40px 0;
 }

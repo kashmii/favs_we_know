@@ -16,7 +16,7 @@
 
       <div class="row mb-3 d-flex justify-content-center">
         <%= f.label :score, class: "col-md-3 form-label" %>
-        <%= f.text_field :score, class: "col-md-6" %>
+        <%= f.select :score, [100, 95, 90, 85, 80, 70, 50, 30, 0], {include_blank: "選択する"}, {class: "col-md-6 score-select"} %>
       </div>
 
       <div class="row mb-3 d-flex justify-content-center">
