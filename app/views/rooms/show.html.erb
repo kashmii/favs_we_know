@@ -6,8 +6,12 @@
   <% @restaurants.each do |restaurant| %>
     <div class="row mb-2">
       <div class="col-6 col-md-3">
-        <!-- img-thumbnailをクラスに置くことで、bootstrapが自動で親要素にサイズを合わせてくれる -->
-        <%= image_tag "blank_mono.jpg", class: "img-thumbnail" %>
+        <% if restaurant.images.present? %>
+            <%= image_tag restaurant.images.first.url, class: "img-thumbnail" %>
+        <% else %>
+          <!-- img-thumbnailをクラスに置くことで、bootstrapが自動で親要素にサイズを合わせてくれる -->
+          <%= image_tag "blank_mono.jpg", class: "img-thumbnail" %>
+        <% end %>
       </div>
       <div class="col-6 col-md-9 mt-4">
       <span><%= link_to restaurant.name, restaurant_path(restaurant.id) %></span>

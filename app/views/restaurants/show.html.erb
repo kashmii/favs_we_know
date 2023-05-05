@@ -4,7 +4,19 @@
 <div>
   <!-- img表示 -->
   <div style="text-align: center;">
+    <!-- 画像がある場合はそれをloopで表示(最大3枚) -->
+    <% if @restaurant.images.present? %>
+      <%= image_tag @restaurant.images.first.url, class: "img-thumbnail", style: "max-height: 300px" %>
+      <% if @restaurant.images[1].present? %>
+        <%= image_tag @restaurant.images[1].url, class: "img-thumbnail", style: "max-height: 300px" %>
+      <% end %>
+      <% if @restaurant.images[2].present? %>
+        <%= image_tag @restaurant.images[2].url, class: "img-thumbnail", style: "max-height: 300px" %>
+      <% end %>
+    <% else %>
+    <!-- でなければデフォルト画像 -->
     <%= image_tag "blank_mono.jpg", class: "img-thumbnail", style: "max-height: 300px" %>
+    <% end %>
   </div>
 
   <!-- 基礎情報表示 -->

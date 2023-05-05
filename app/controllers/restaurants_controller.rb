@@ -55,7 +55,8 @@ class RestaurantsController < ApplicationController
       :place,
       :holiday,
       :url,
-      :tel
+      :tel,
+      {images: []}
     )
   end
 end
