@@ -1,25 +1,47 @@
-<h1>RoomSetting#index</h1>
-<p>Find me in app/views/room_setting/index.html.erb</p>
-<p>ログインユーザー:<%= current_user.name %></p>
-<p>ログインID:<%= current_user.id %></p>
+<div class="container">
 
-<!-- コピー対象要素とコピーボタン -->
-<textarea id="copy2">
-飲食店共有スペース／ここから登録＆入室をお願いします！<%= @url %>
-</textarea>
-<button onclick="copyToClipboard()">コピーする</button>
+  <div class="main-image">
+    <%= image_tag "sending_by_phone.jpg", class: "img-thumbnail" %>
+  </div>
 
-<!-- ここに通知エリア作成 -->
-<p>通知一覧</p>
+  <p class="text-center mt-3">下のメッセージを友だちに送信し<br>記載されているURLから登録してもらいましょう</p>
 
-<%= link_to :back do %>
-  <button>戻る</button>
-<% end %>
+  <!-- コピー対象要素とコピーボタン -->
+  <div class="d-flex justify-content-center mt-5">
+    <textarea id="copy2" cols="50" rows="10">
+    飲食店共有アプリです。ここから登録＆入室申請をお願いします！
+    <%= @url %>
+
+    【登録方法】
+    １，上のURLをクリックして会員登録する
+    ２，その後表示される「入室申請する」をクリックする
+    ３，友だちが申請をOKしたら完了です！
+    </textarea>
+  </div>
+
+  <div class="d-flex justify-content-center mt-5">
+    <button onclick="copyToClipboard()" class="btn btn-success">コピーする</button>
+  </div>
+
+  <div class="d-flex justify-content-center mt-3">
+    <%= link_to "戻る", root_path, class: "btn btn-secondary" %>
+  </div>
+
+  <div class="flow-box mx-auto">
+    <h5 class="text-center mt-5">友だちをあなたの部屋に呼ぶ方法</h5>
+    <p class="mt-4">あなた：下のメッセージを友だちに送る</p>
+    <p class="mt-3">友だち：記載されているURLをクリックして登録する</p>
+    <p class="mt-3">友だち：その後表示される「入室申請する」をクリックする</p>
+    <p class="mt-3">あなた：申請通知が届くので、それをOKする</p>
+    <p class="text-center my-4">これで友だちと飲食店情報を共有できます！</p>
+  </div>
+</div>
 
 <script>
   function copyToClipboard() {
     var txt = document.getElementById("copy2");
     txt.select();
     document.execCommand("Copy");
+    alert("テキストをコピーしました！")
   }
 </script>

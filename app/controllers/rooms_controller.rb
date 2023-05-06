@@ -8,14 +8,14 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    Room.transaction do
+    ActiveRecord::Base.transaction do
       if @room.save!
         @user.update!(room_id: @room.id, request_allowed: false)
         RoomFounder.create!(room_id: @room.id, founder_id: @user.id)
         redirect_to room_url(token: @room.token)
-      else
-        redirect_to root_path
       end
+    rescue
+      render :new
     end
   end
 

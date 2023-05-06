@@ -8,7 +8,7 @@ class Room < ApplicationRecord
   has_many :room_restaurants, dependent: :destroy
   has_one :room_founder, dependent: :destroy
 
-  validates :name, presence: true, length: { in: 2..50 }
+  validates :name, presence: true, length: { in: 2..50 }, uniqueness: { case_sensitive: true }
 
   private
 
