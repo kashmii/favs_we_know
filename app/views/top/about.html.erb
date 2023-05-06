@@ -25,7 +25,7 @@
     </div>
     
   <!-- 招待されてきて、会員登録した後 -->
-  <% elsif user_signed_in? && session[:previous_url].present? %>
+  <% elsif user_signed_in? && (session[:previous_url].present? || !@user.request_allowed) %>
     <% unless @user.request_allowed == false %>
       <p class="text-center">招待されてきた方はこちら</p>
       <div class="d-flex justify-content-center mb-5">
@@ -37,6 +37,9 @@
       <p class="text-center">申請を取り消す場合はこちら</p>
       <div class="d-flex justify-content-center mb-5">
         <%= button_to "申請を取り消す", member_requests_path, method: :delete, class: "btn btn-secondary" %>
+      </div>
+      <div class="d-flex justify-content-center mb-5">
+        <%= link_to "トップページへ", root_path, class: "btn btn-secondary" %>
       </div>
     <% end %>
 

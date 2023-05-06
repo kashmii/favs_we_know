@@ -10,6 +10,9 @@
       <p class="text-center mt-3">友だちの部屋に入れてもらう</p>
     <% else %>
       <p class="text-center my-5">申請に返答があるまで少々お待ち下さいm(_ _)m</p>
+      <div class="d-flex justify-content-center about mb-3">
+        <%= link_to "このアプリについて", about_path, class: "btn btn-secondary" %>
+      </div>
     <% end %>
 
     <% if @notification %>

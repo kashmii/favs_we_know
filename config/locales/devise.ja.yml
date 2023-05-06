@@ -139,5 +139,5 @@ ja:
       not_found: は見つかりませんでした。
       not_locked: は凍結されていません。
       not_saved:
-        one:
-        other:
+        one: エラーが発生しました。
+        other: エラーが発生しました。
