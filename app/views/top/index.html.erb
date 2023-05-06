@@ -2,21 +2,34 @@
   <h1 class="text-center mt-5"><%= @app_title %></h1>
 
   <% if user_signed_in? %>
-    <!-- ログインしていて、部屋を持っていない：部屋作成画面 -->
-    <p>ログインユーザー:<%= current_user.name %></p>
-    <p>ログインID:<%= current_user.id %></p>
+  <!-- ログインしていて、部屋を持っていない：部屋作成画面 -->
+    <% if @user.request_allowed %>
+      <p class="text-center mt-5">次のステップは</p>
+      <p class="text-center mt-5">部屋を作成して、友だちを呼ぶ</p>
+      <p class="text-center mt-3">もしくは</p>
+      <p class="text-center mt-3">友だちの部屋に入れてもらう</p>
+    <% else %>
+      <p class="text-center my-5">申請に返答があるまで少々お待ち下さいm(_ _)m</p>
+    <% end %>
 
     <% if @notification %>
       <div class="answer-modal">
         <%= render 'answer_message' %>
       </div>
     <% end %>
-    <% if session[:previous_url].nil? %>
-      <p>部屋を作成して、友だちを呼びましょう！</p>
-      <%= button_to "部屋作成へ", new_room_path, method: :get %>
+    <% if session[:previous_url].nil? && @user.request_allowed %>
+      <div class="d-flex justify-content-center">
+        <%= link_to "部屋作成へ", new_room_path, class: "btn btn-success mb-3" %>
+      </div>
     <% end %>
 
-    <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <div class="d-flex justify-content-center">
+      <%= link_to "入室申請へ(予定)", '#', class: "btn btn-clear border mb-3" %>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-dark mb-3" %>
+    </div>
 
   <% else %>
     <!-- ログインしていなければログインor会員登録を促す -->

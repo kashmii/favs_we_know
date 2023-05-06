@@ -5,15 +5,14 @@
   <!-- action = member_request のとき -->
     <div class="row">
       <div class="col-sm-6 col-12">
-        <p><%= notification.visitor.name %>から通知が来ています</p>
-        <p><%= notification.id %></p>
+        <p class="text-center"><%= notification.visitor.name %>さんからメンバー申請が来ています</p>
       </div>
       <% if notification.checked == false %>
-        <div class="col-sm-3 col-12">
-          <%= link_to 'OKする', allow_member_request_path(notification.member_request_id), method: :post, class: 'btn btn-primary btn-block' %>
+        <div class="col-sm-3 col-6 d-flex justify-content-center">
+          <%= link_to 'OKする', allow_member_request_path(notification.member_request_id), method: :post, class: 'btn btn-primary' %>
         </div>
-        <div class="col-sm-3 col-12">
-          <%= link_to '断る', deny_member_request_path(notification.member_request_id), method: :post, class: 'btn btn-block btn-danger' %>
+        <div class="col-sm-3 col-6 d-flex justify-content-center">
+          <%= link_to '断る', deny_member_request_path(notification.member_request_id), method: :post, class: 'btn btn-danger' %>
         </div>
       <% elsif notification.checked == true %>
         <div class="col-sm-3 col-12">回答済</div>

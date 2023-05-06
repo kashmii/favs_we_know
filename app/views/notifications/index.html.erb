@@ -1,14 +1,15 @@
-<div>
-  <h4 class="sub-title">通知</h4>
-  <% if @notifications.exists? %>
+<div class="container">
+  <h4 class="text-center my-3">通知</h4>
+  <% if @notifications.present? %>
     <div class="users-index">
       <%= render @notifications %>
       <%= paginate @notifications %>
     </div>
   <% else %>
-    <p>通知はありません</p>
+    <p class="text-center my-3">通知はありません</p>
   <% end %>
 
-
-  <%= link_to '戻る', room_path(token: @room.token), class: "btn btn-secondary" %>
+  <div class="d-flex justify-content-center mt-5">
+    <%= link_to '戻る', room_path(token: @room.token), class: "btn btn-secondary" %>
+  </div>
 </div>
