@@ -23,12 +23,12 @@ class RestaurantUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url
+  # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
-      'blank_mono.jpg'
-  end
+  #     'blank_mono.jpg'
+  # end
 
   # Process files as they are uploaded:
   # process scale: [200, 300]

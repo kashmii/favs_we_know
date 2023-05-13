@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   private
 
     def set_app_title
-      @app_title = '飲食店共有アプリ'
+      @app_title = '飲食店共有ルーム'
     end
 end
