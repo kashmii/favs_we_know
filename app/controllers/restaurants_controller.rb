@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_room, only: [:index, :show, :create, :update]
+  before_action :set_room, only: [:index, :show, :create, :update, :edit]
 
   def index
     redirect_to new_restaurant_path(@room.token)
@@ -26,7 +26,7 @@ class RestaurantsController < ApplicationController
     @restaurant.room_id = current_user.room_id
     @restaurant.last_editor_id = current_user.id
     if @restaurant.valid?
-        @restaurant.save!
+      @restaurant.save!
         redirect_to room_path(@room)
     else
       render :new
@@ -34,6 +34,21 @@ class RestaurantsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def edit
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+  def update
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.last_editor_id = current_user.id
+    if @restaurant.valid?
+      @restaurant.update!(restaurant_params)
+        redirect_to room_path(@room)
+    else
+      render :edit
+    end
   end
 
   private
@@ -56,7 +71,8 @@ class RestaurantsController < ApplicationController
       :holiday,
       :url,
       :tel,
-      {images: []}
+      :images,
+      :images_cache
     )
   end
 end
