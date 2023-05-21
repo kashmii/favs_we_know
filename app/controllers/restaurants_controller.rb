@@ -51,6 +51,12 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def destroy
+    restaurant = Restaurant.find(params[:id])
+    restaurant.destroy
+    redirect_to root_path, notice: "#{restaurant.name}を削除しました。"
+  end
+
   private
 
   def set_room

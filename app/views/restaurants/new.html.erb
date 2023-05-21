@@ -38,6 +38,7 @@
       <div class="row mb-3 d-flex justify-content-center">
         <%= f.label :images, class: "col-md-3 form-label img" %>
         <%= f.file_field :images, accept: 'image/*', class: "col-md-6" %>
+        <%= f.hidden_field :images_cache %>
       </div>
     </div>
 

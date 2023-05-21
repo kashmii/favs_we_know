@@ -18,15 +18,18 @@
     <div class="basic-info" style="padding: 10px; margin: 10px;">
       <div class="d-flex justify-content-between">
         <h2><%= @restaurant.name %></h2>
-        <%= link_to '編集する', edit_restaurant_path(@restaurant), class: "btn-clear border" %>
+        <%= link_to '編集', edit_restaurant_path(@restaurant), class: "btn-clear border edit-button p-2" %>
       </div>
 
         <p><%= @restaurant.genre %>／<%= @restaurant.place %></p>
 
         <span>
           定休日：<%= @restaurant.holiday.present? ? @restaurant.holiday : '不明' %>
-          ／店のホームページ：
-        </span>
+          ／店のホームページ：<%= @restaurant.url.present? ? @restaurant.url : '登録なし' %>
+        </span><br>
+        <% if @restaurant.tel.present? %>
+          <span>TEL：<%= @restaurant.tel %></span>
+        <% end %>
     </div>
   </div>
 
