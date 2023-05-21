@@ -12,6 +12,10 @@
   }
 }
 
+.edit-button {
+  color: black;
+}
+
 .required:after {
   content: " *";
 }
@@ -21,7 +25,7 @@
 }
 
 .img:after {
-  content: " (3枚まで)";
+  content: " (1枚まで)";
 }
 
 .submit {

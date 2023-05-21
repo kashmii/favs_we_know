@@ -1,13 +1,14 @@
-<h4 class="text-center mt-3">レポート詳細画面</h4>
-<p class="text-center mt-3">写真の場所</p>
-
-<div class="display-container">
-  <p>タイトル： <%= @report.title %></p>
-  <p>スコア： <%= @report.score %></p>
-  <p>本文： <%= @report.content %></p>
-</div>
-
-<div class="button-container">
-  <%= link_to '戻る', restaurant_path(@restaurant), class: "btn btn-secondary" %>
-  <%= link_to '削除', @report, method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: 'btn btn-danger' %>
+<div class="container">
+  <h4 class="text-center mt-3">レポート詳細画面</h4>
+  
+  <div class="display-container mt-5">
+    <p class="mt-3">タイトル： <%= @report.title %></p>
+    <p>スコア： <%= @report.score %></p>
+    <p>本文： <%= @report.content %></p>
+  </div>
+  
+  <div class="button-container mt-3">
+    <%= link_to '戻る', restaurant_path(@restaurant), class: "btn btn-secondary" %>
+    <%= link_to '削除', @report, method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: 'btn btn-danger' %>
+  </div>
 </div>
