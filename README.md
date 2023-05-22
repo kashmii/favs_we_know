@@ -28,6 +28,7 @@ URL: https://restaurants-we-know.herokuapp.com/
 - 
 
 ## アプリ利用の流れ紹介
+- 画面一覧（スクショ）：　https://bit.ly/45mDGq4
 - （後日掲載予定）
  
 
