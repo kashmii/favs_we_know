@@ -1,0 +1,18 @@
+<div class="container">
+  <h1 class="text-center mt-3">メンバー申請</h1>
+
+  <%= form_with url: member_requests_path, local: true do %>
+    <div class="d-flex justify-content-center mt-5">
+      <label class="col-md-2 form-label required">部屋ID</label>
+      <input name='room_token' , class="col-md-4">
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+      <%= button_tag 'メンバー申請する', type: 'submit', class: "btn btn-success" %>
+    </div>
+    <!-- ボタン押下後、部屋名、部屋オーナーを表示してここで良いか確認アラートを表示する。その後requestをクリエイト -->
+  <% end %>
+
+  <div class="d-flex justify-content-center mt-3">
+    <%= link_to "トップページへ", root_path, class: "btn btn-secondary" %>
+  </div>
+</div>

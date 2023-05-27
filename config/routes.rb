@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :reports, controller: 'restaurants/reports'
   end
 
-  resources :member_requests, only: [:create, :destroy] do
+  resources :member_requests, only: [:new, :create, :destroy] do
     member do
       post :allow
       post :deny
