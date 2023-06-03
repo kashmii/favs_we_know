@@ -9,22 +9,26 @@ class MemberRequestsController < ApplicationController
   end
 
   def create
-    if current_user.request_allowed == true
-      get_user
-      @room = Room.find_by(token: params[:room_token])
-      if @room.nil?
-        redirect_to new_member_request_path, notice: 'idが間違っています'
-      else
-        request = MemberRequest.new(room_id: @room.id, appricant_id: @user.id)
-        MemberRequest.transaction do
-          request.save!
-          # 部屋製作者を取得してnotificationテーブルのvisited_idに設定する
-          founder_id = RoomFounder.find_by(room_id: @room.id).founder_id
-          room_founder = User.find(founder_id)
-          room_founder.create_notification_member_request!(current_user, request)
-          @user.update!(request_allowed: false)
-          # flash出す
-          redirect_to about_path, notice: 'メンバー申請しました'
+    if params[:room_token].blank?
+      redirect_to new_member_request_path, notice: 'idが入力されていません' 
+    else
+      if current_user.request_allowed == true
+        get_user
+        @room = Room.find_by(token: params[:room_token])
+        if @room.nil?
+          redirect_to new_member_request_path, notice: 'idが間違っています'
+        else
+          request = MemberRequest.new(room_id: @room.id, appricant_id: @user.id)
+          MemberRequest.transaction do
+            request.save!
+            # 部屋製作者を取得してnotificationテーブルのvisited_idに設定する
+            founder_id = RoomFounder.find_by(room_id: @room.id).founder_id
+            room_founder = User.find(founder_id)
+            room_founder.create_notification_member_request!(current_user, request)
+            @user.update!(request_allowed: false)
+            # flash出す
+            redirect_to about_path, notice: 'メンバー申請しました'
+          end
         end
       end
     end
