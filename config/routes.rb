@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       post :allow
       post :deny
     end
+    collection do
+      post :check
+    end
   end
   resources :notifications, only: [:index, :create, :destroy] do
     member do
